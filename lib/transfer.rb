@@ -23,8 +23,8 @@ binding.pry
       @status = 'rejected'
     
     else 
-      @receiver.deposit(@amount * -1)
-      sender.deposit(@amount)
+      @sender.deposit(@amount * -1)
+      @receiver.deposit(@amount)
       @status = 'complete'
     end
   end  
