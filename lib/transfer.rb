@@ -15,7 +15,7 @@ class Transfer
   end
 
   def execute_transaction
-binding.pry
+#binding.pry
     if @status == 'complete'
       puts "Transaction was already excuted"
     elsif @sender.balance < @amount
