@@ -1,3 +1,5 @@
+require 'pry'
+
 class Transfer
   attr_accessor :sender, :receiver, :amount, :status
   
@@ -25,6 +27,6 @@ class Transfer
       sender.deposit(@amount)
       @status = 'complete'
     end
-    # binding.pry
+    binding.pry
   end  
 end
