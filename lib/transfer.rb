@@ -23,8 +23,8 @@ class Transfer
       @status = 'rejected'
     
     else 
-      @sender.deposit(@amount * -1)
-      @receiver.deposit(@amount)
+      self.sender.deposit(@amount * -1)
+      self.receiver.deposit(@amount)
       @status = 'complete'
     end
   end  
