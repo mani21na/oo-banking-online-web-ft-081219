@@ -18,7 +18,7 @@ class Transfer
 #binding.pry
     if @status == 'complete'
       puts "Transaction was already excuted"
-    elsif @sender.balance < @amount
+    elsif self.sender.balance < @amount
       return "Transaction rejected. Please check your account balance."
       @status = 'rejected'
     
