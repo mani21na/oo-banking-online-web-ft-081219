@@ -1,5 +1,4 @@
-require 'pry'
-
+ require 'pry'
 class Transfer
   attr_accessor :sender, :receiver, :amount, :status
   
@@ -11,17 +10,38 @@ class Transfer
   end
 
   def valid?
-    self.sender.valid? && self.receiver.valid?
+    sender.valid? && receiver.valid?
   end
 
   def execute_transaction
-    if @sender.balance > @amount && @status == "pending"
-      @sender.balance -= @amount
-      @receiver.balance += @amount
-      @status = "complete"
+    if valid? && @status == 'pending'
+      if amount < self.sender.balance
+        self.sender.balance -= amount
+        self.receiver.balance += amount
+        @status = 'complete'
+      else
+         @status = 'rejected'
+         'Transaction rejected. Please check your account balance.'
+      end
     else
-      @status = "rejected"
-      return "Transaction rejected. Please check your account balance."
+       @status = 'rejected'
+       'Transaction rejected. Please check your account balance.'
+    end
+  end
+
+  def reverse_transfer
+    if valid? && @status == 'complete'
+      if amount < self.receiver.balance
+        self.receiver.balance -= amount
+        self.sender.balance += amount
+        @status = 'reversed'
+      else
+         @status = 'rejected'
+         'Transaction rejected. Please check your account balance.'
+      end
+    else
+       @status = 'rejected'
+       'Transaction rejected. Please check your account balance.'
     end
   end
 end
